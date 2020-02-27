@@ -1,0 +1,10 @@
+{
+  "posts": [
+    {
+      "id": 1,
+      "title": "Work",
+      "todos": ["CV", "Test task", "Interview"],
+      "authorId": "1"
+    }
+  ]
+}
