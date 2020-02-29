@@ -4,7 +4,7 @@
       <h2>{{ note.title }}</h2>
     </div>
     <div class="note_todos">
-      <TodoList :todos="note.todos" v-on:delete-todo="deleteTodo"/>
+      <TodoList :todos="note.todos" v-on:delete-todo="deleteTodo" v-on:mark-complete="markComplete"/>
     </div>
   </div>
 </template>
@@ -14,9 +14,10 @@
     display: grid;
     grid-template-areas: "title" "todos";
     border: 1px solid #dedede;
-    width: 40%;
     padding: 0;
     margin: 0;
+    font-size: 22px;
+    font-family: courier, monospace;
 
     &_title {
       grid-area: title;
@@ -43,7 +44,10 @@ export default {
   },
   methods: {
     deleteTodo (todoId) {
-      this.$emit('delete-todo', todoId)
+      this.$emit('delete-todo', todoId, this.note.id)
+    },
+    markComplete (todoId) {
+      this.$emit('mark-complete', todoId, this.note.id)
     }
   }
 }

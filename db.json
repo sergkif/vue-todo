@@ -1,10 +1,46 @@
 {
-  "posts": [
+  "notes": [
     {
       "id": 1,
-      "title": "Work",
-      "todos": ["CV", "Test task", "Interview"],
-      "authorId": "1"
+      "title": "Note test",
+      "todos": [
+        {
+          "id": 1,
+          "title": "Go workout",
+          "completed": false
+        },
+        {
+          "id": 4,
+          "title": "Clean up room",
+          "completed": false
+        },
+        {
+          "id": 5,
+          "title": "Finish work",
+          "completed": false
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "title": "Note 2 test",
+      "todos": [
+        {
+          "id": 1,
+          "title": "Go workout",
+          "completed": false
+        },
+        {
+          "id": 2,
+          "title": "Do laundry",
+          "completed": false
+        },
+        {
+          "id": 3,
+          "title": "Cook food",
+          "completed": false
+        }
+      ]
     }
   ]
 }

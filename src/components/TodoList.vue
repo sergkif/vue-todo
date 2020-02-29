@@ -2,7 +2,7 @@
   <div>
     <ul class="todoList">
       <li class="todoList_item" v-bind:key="todo.id" v-for="todo in todos">
-        <Todo v-bind:todo="todo" v-on:delete-todo="$emit('delete-todo', todo.id)"/>
+        <Todo v-bind:todo="todo" v-on:delete-todo="$emit('delete-todo', todo.id)" v-on:mark-complete="$emit('mark-complete', todo.id)"/>
       </li>
     </ul>
   </div>
@@ -10,10 +10,9 @@
 
 <style lang="scss" scoped>
   .todoList {
+    user-select: none;
     list-style: none;
     color: #555;
-    font-size: 22px;
-    font-family: courier, monospace;
     padding: 0;
     margin: 0;
 
@@ -28,6 +27,10 @@
         background-color: #f0f0f0;
         transition: all 0.2s;
       }
+    }
+
+    :last-child {
+      border: none;
     }
   }
 </style>

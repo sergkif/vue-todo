@@ -2,7 +2,9 @@
   <div class="todo" >
     <span class="todo_title" v-bind:class="{ 'todo_title__completed': todo.completed }" @click="markComplete">{{ todo.title }}</span>
     <div class="todo_checkbox" @click="markComplete"><input class="todo_checkbox_input" type="checkbox" v-model="todo.completed"></div>
-    <button class="todo_button" @click="$emit('delete-todo', todo.id)">Delete</button>
+    <div class="todo_button" @click="$emit('delete-todo', todo.id)">
+      <img class="todo_button_image" src="">
+    </div>
   </div>
 </template>
 
@@ -35,7 +37,27 @@
 
     &_button {
       grid-area: button;
-      padding: 10px;
+      display: flex;
+
+      &_image {
+        content: url("../assets/delete-24px.svg");
+        padding: 10px;
+        width: stretch;
+      }
+
+      :hover {
+        transition: .5s;
+        background-color: #9c9c9c;
+      }
+    }
+
+    &_delete {
+      display: block;
+      text-indent: -9999px;
+      width: 100px;
+      height: 82px;
+      background: url(/assets/delete-24px.svg);
+      background-size: 24px 24px;
     }
   }
 </style>
@@ -49,6 +71,7 @@ export default {
   methods: {
     markComplete() {
       this.todo.completed = !this.todo.completed
+      this.$emit('mark-complete', this.todo.id)
     }
   }
 }
