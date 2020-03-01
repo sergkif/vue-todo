@@ -6,7 +6,7 @@
       "todos": [
         {
           "id": 1,
-          "title": "Go workout",
+          "title": "Go workout 2 times",
           "completed": false
         },
         {
@@ -17,6 +17,11 @@
         {
           "id": 5,
           "title": "Finish work",
+          "completed": false
+        },
+        {
+          "id": 6,
+          "title": "Cook dinner",
           "completed": false
         }
       ]

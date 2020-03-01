@@ -1,17 +1,27 @@
 <template>
-  <div class="about">
-    <h1>Edit note: <span v-if="note">"{{ note.title }}"</span></h1>
-    {{ note.title }}
+  <div class="editPage">
+    <EditNote :id="id.toString()"/>
   </div>
 </template>
 
 <style lang="scss" scoped>
-
+  .editPage {
+    display: flex;
+    justify-content: center;
+  }
 </style>
 
 <script>
 export default {
   name: "EditPage",
-  props: ["note"]
+  components: {
+    EditNote: () => import('@/components/EditNote.vue')
+  },
+  props: {
+    id: {
+      type: String,
+      required: false
+    }
+  }
 }
 </script>

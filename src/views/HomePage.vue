@@ -1,11 +1,11 @@
 <template>
-  <div class="home">
+  <div class="homePage">
     <NoteList />
   </div>
 </template>
 
 <style lang="scss" scoped>
-  .home {
+  .homePage {
     display: flex;
     justify-content: center;
   }

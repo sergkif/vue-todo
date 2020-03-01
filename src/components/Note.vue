@@ -82,7 +82,7 @@ export default {
       this.$emit('save-new-title', newTitle, this.note.id)
     },
     editNote () {
-      this.$router.push({ name: 'EditPage', params: { id: this.note.id, note: this.note } })
+      this.$router.push({ name: 'EditPage', params: { id: this.note.id.toString() }})
     },
   }
 }
