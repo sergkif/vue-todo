@@ -3,7 +3,7 @@
     <router-link exact-active-class="navbar_home__active" class="navbar_home" to="/">
       <img class="navbar_home_image" src="@/assets/home-24px-white.svg">
     </router-link>
-    <router-link exact-active-class="navbar_edit__active" class="navbar_edit" to="/about">
+    <router-link exact-active-class="navbar_edit__active" class="navbar_edit" to="/edit">
       <img class="navbar_home_image" src="@/assets/add_circle_outline-24px-white.svg">
     </router-link>
   </div>
@@ -13,11 +13,11 @@
   .navbar {
     display: flex;
     flex-flow: column;
-    position: absolute;
-    left: 0;
+    position: fixed;
     top: 0;
+    left: 0;
     width: 50px;
-    height: 100%;
+    height: 100vh;
     background-color: #2c3e50;
     justify-content: center;
     align-items: center;

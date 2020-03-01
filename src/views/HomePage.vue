@@ -13,7 +13,7 @@
 
 <script>
 export default {
-  name: 'Home',
+  name: 'HomePage',
   components: {
     NoteList: () => import('@/components/NoteList.vue')
   }

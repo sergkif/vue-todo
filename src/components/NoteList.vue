@@ -1,7 +1,8 @@
 <template>
   <div class="noteList">
-    <section class="noteList_section" v-for="note in notes" :key="note.id" >
-      <Note :note="note" v-on:delete-todo="deleteTodo" v-on:mark-complete="markComplete"/>
+    <section class="noteList_section" v-for="note in notes" :key="note.id" @click="openModal(note.id)">
+      <Note :note="note" :modalId="modalId" 
+      v-on:delete-todo="deleteTodo" v-on:mark-complete="markComplete" v-on:save-new-title="saveNewTitle" v-on:delete-note="deleteNote"/>
     </section>
     <div v-if="error" class="noteList_error">{{ error }}</div>
   </div>
@@ -30,10 +31,14 @@ export default {
   data () {
     return {
       notes: {},
-      error: ''
+      error: '',
+      modalId: null
     }
   },
   methods: {
+    openModal (noteId) {
+      this.modalId = noteId
+    },
     deleteTodo (todoId, noteId) {
       this.notes.forEach(note => {
         if (note.id === noteId) {
@@ -80,7 +85,7 @@ export default {
         })
         .catch(err => console.log(err))
     },
-    async markComplete (todoId, noteId) {
+    async saveEditNote (noteId) {
       await fetch('http://localhost:3000/notes/' + noteId, {
         method: 'PUT',
         headers: {
@@ -88,6 +93,32 @@ export default {
           'Content-Type': 'application/json'
         },
         body: JSON.stringify(this.notes.find(note => note.id === noteId))
+      })
+        .then(response => {
+          if (response.status !== 200) {
+            throw new Error(response.statusText)
+          }
+        })
+        .catch(err => console.log(err))
+    },
+    saveNewTitle (newTitle, noteId) {
+      this.notes.forEach(note => {
+        if (note.id === noteId) {
+          note.title = newTitle
+          this.saveEditNote(noteId)
+        }
+      })
+    },
+    markComplete (noteId) {
+      this.saveEditNote(noteId)
+    },
+    deleteNote (noteId) {
+      this.notes = this.notes.filter(note => note.id !== noteId)
+      this.deleteNoteFetch(noteId)
+    },
+    async deleteNoteFetch (noteId) {
+      await fetch('http://localhost:3000/notes/' + noteId, {
+        method: 'DELETE',
       })
         .then(response => {
           if (response.status !== 200) {

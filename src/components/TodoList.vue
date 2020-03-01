@@ -1,8 +1,8 @@
 <template>
   <div>
     <ul class="todoList">
-      <li class="todoList_item" v-bind:key="todo.id" v-for="todo in todos">
-        <Todo v-bind:todo="todo" v-on:delete-todo="$emit('delete-todo', todo.id)" v-on:mark-complete="$emit('mark-complete', todo.id)"/>
+      <li class="todoList_item" :class="{ todoList_item__activeHover: isModal }" v-bind:key="todo.id" v-for="todo in todos">
+        <Todo :todo="todo" :isModal="isModal" v-on:delete-todo="$emit('delete-todo', todo.id)" v-on:mark-complete="$emit('mark-complete')"/>
       </li>
     </ul>
   </div>
@@ -23,9 +23,11 @@
       height: auto;
       text-transform: capitalize;
 
-      :hover {
-        background-color: #f0f0f0;
-        transition: all 0.2s;
+      &__activeHover {
+        :hover {
+          background-color: #f0f0f0;
+          transition: all 0.2s;
+        }
       }
     }
 
@@ -41,8 +43,17 @@ export default {
   components: {
     Todo: () => import('@/components/Todo.vue')
   },
-  props: [
-    "todos"
-  ]  
+  props: {
+    todos: {
+      type: Array,
+      required: false,
+      default: () => {}
+    },
+    isModal: {
+      type: Boolean,
+      required: false,
+      default: false
+    }
+  }
 }
 </script>

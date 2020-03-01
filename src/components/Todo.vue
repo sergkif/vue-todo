@@ -1,8 +1,10 @@
 <template>
   <div class="todo" >
-    <span class="todo_title" v-bind:class="{ 'todo_title__completed': todo.completed }" @click="markComplete">{{ todo.title }}</span>
-    <div class="todo_checkbox" @click="markComplete"><input class="todo_checkbox_input" type="checkbox" v-model="todo.completed"></div>
-    <div class="todo_button" @click="$emit('delete-todo', todo.id)">
+    <span class="todo_title" :class="{ 'todo_title__completed': todo.completed }" @click="markComplete">{{ todo.title }}</span>
+    <div class="todo_checkbox" @click="markComplete">
+      <input class="todo_checkbox_input" :disabled="!isModal" type="checkbox" v-model="todo.completed">
+    </div>
+    <div class="todo_button" :class="{ todo_button__activeHover: isModal }" @click="deleteTodo(todo.id)">
       <img class="todo_button_image" src="">
     </div>
   </div>
@@ -45,9 +47,11 @@
         width: stretch;
       }
 
-      :hover {
-        transition: .5s;
-        background-color: #9c9c9c;
+      &__activeHover {
+        :hover {
+          transition: .5s;
+          background-color: #9c9c9c;
+        }
       }
     }
 
@@ -65,13 +69,26 @@
 <script>
 export default {
   name: 'Todo',
-  props: [
-    "todo"
-  ],
+  props: {
+    todo: {
+      type: Object,
+      required: true
+    },
+    isModal: {
+      type: Boolean,
+      required: false,
+      default: false
+    }
+  },
   methods: {
     markComplete() {
-      this.todo.completed = !this.todo.completed
-      this.$emit('mark-complete', this.todo.id)
+      if (this.isModal) {
+        this.todo.completed = !this.todo.completed
+        this.$emit('mark-complete')
+      }
+    },
+    deleteTodo(todoId) {
+      if (this.isModal) this.$emit('delete-todo', todoId)
     }
   }
 }
