@@ -1,6 +1,6 @@
 <template>
   <div class="editPage">
-    <EditNote :id="id.toString()"/>
+    <EditNote :id="getId"/>
   </div>
 </template>
 
@@ -21,6 +21,12 @@ export default {
     id: {
       type: String,
       required: false
+    }
+  },
+  computed: {
+    getId () {
+      if (this.id) return this.id.toString()
+      else return ''
     }
   }
 }
